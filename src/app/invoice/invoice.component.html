@@ -1,0 +1,187 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+<div class="container">
+
+  <h1>Syötä lasku:</h1>
+  <form #f="ngForm" (ngSubmit)="onSubmit() ">
+
+
+
+
+
+    <div class="form-group col-md-6 mb-2">
+      <label for="invoiceSender">Lähettäjä:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="invoiceSender"
+        [(ngModel)]="invoice.invoiceSender"
+        placeholder="Anna lähettäjä"
+        name="invoiceSender"
+        #invoiceSender="ngModel"
+        required minlength="2"
+        pattern="^[a-zA-Z ]*$"
+      >
+
+    <div class ="error"
+      *ngIf="invoiceSender.invalid && (invoiceSender.dirty ||invoiceSender.touched)">
+      <p *ngIf="invoiceSender.hasError('required')">Enter invoice sender</p>
+      <p *ngIf="invoiceSender.hasError('minlength')">Minimum 2 charcacters required</p>
+    </div>
+    </div>
+
+    <div class="form-group col-md-6 mb-2">
+      <label for="recipientName">Saaja:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="recipientName"
+        [(ngModel)]="invoice.recipientName"
+        placeholder="Saaja"
+        name="recipientName"
+        #recipientName="ngModel"
+        required minlength="2"
+        pattern="^[a-zA-Z ]*$"
+      >
+
+    <div class ="error"
+         *ngIf="recipientName.invalid && (recipientName.dirty || recipientName.touched)">
+      <p *ngIf="recipientName.hasError('required')">Enter recipient name</p>
+      <p *ngIf="recipientName.hasError('minlength')">Minimum 2 charcacters required</p>
+    </div>
+</div>
+
+    <div class="form-group col-md-6 mb-2">
+      <label for="recipientIBAN">Tilinumero:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="recipientIBAN"
+        [(ngModel)]="invoice.recipientIBAN"
+        placeholder="Tilinumero"
+        name="recipientIBAN"
+        #recipientIBAN="ngModel"
+        required minlength="1"
+        pattern="^FI[0-9]{2}[0-9]{6}[0-9]{7}[0-9]{1}$"
+      >
+
+    <div class ="error" *ngIf="recipientIBAN.invalid && (recipientIBAN.dirty || recipientIBAN.touched)">
+      <p *ngIf="recipientIBAN.hasError('required')">Enter IBAN</p>
+      <p *ngIf="recipientIBAN.hasError('pattern')">Write IBAN</p>
+    </div>
+</div>
+
+    <div class="form-group col-md-6 mb-2">
+      <label for="reference">Viitenumero:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="reference"
+        [(ngModel)]="invoice.reference"
+        placeholder="Viitenumero"
+        name="reference"
+        #reference="ngModel"
+        required minlength="2"
+        maxlength="20">
+<!--        lissee tähän pattern jos tiiet-->
+
+    <div class ="error" *ngIf="reference.invalid && (reference.dirty || reference.touched)">
+      <p *ngIf="reference.hasError('required')">Enter reference</p>
+      <p *ngIf="reference.hasError('minlength')">4 digits atleast</p>
+    </div>
+</div>
+
+    <div class="form-group col-md-6 mb-2">
+      <label for="invoiceNumber">Laskunnumero:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="invoiceNumber"
+        [(ngModel)]="invoice.invoiceNumber"
+        placeholder="Laskunnumero"
+        name="invoiceNumber"
+        #invoiceNumber="ngModel"
+        required maxlength="10"
+
+      >
+
+    <div class ="error" *ngIf="invoiceNumber.invalid && (invoiceNumber.dirty || invoiceNumber.touched)">
+      <p *ngIf="invoiceNumber.hasError('required')">Enter invoicenumber</p>
+      <p *ngIf="invoiceNumber.hasError('maxlength')">Max 10 digits</p>
+    </div>
+</div>
+    <div class="form-group col-md-6 mb-2">
+      <label for="bic">BIC:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="bic"
+        [(ngModel)]="invoice.bic"
+        placeholder="BIC"
+        name="bic"
+        #bic="ngModel"
+        required maxlength="8"
+
+      >
+<!--      lisää pattern-->
+
+    <div class ="error" *ngIf="bic.invalid && (bic.dirty || bic.touched)">
+      <p *ngIf="bic.hasError('required')">Enter bic</p>
+      <p *ngIf="bic.hasError('maxlength')">Max 8 digits</p>
+    </div>
+</div>
+    <div class="form-group col-md-6 mb-2">
+      <label for="total">Summa:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="total"
+        [(ngModel)]="invoice.total"
+        placeholder="Summa"
+        name="total"
+        #total="ngModel"
+
+        pattern="^[0-9]*$,"
+      >
+
+
+    <div class ="error"*ngIf="total.invalid && (total.dirty || total.touched)">
+      <p *ngIf="total.hasError('required')">Enter bic</p>
+      <p *ngIf="total.hasError('pattern')">Only digits</p>
+    </div>
+</div>
+    <div class="form-group col-md-6 mb-2">
+      <label for="dueDate">Eräpäivä:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="dueDate"
+        [(ngModel)]="invoice.dueDate"
+        placeholder="Eräpäivä"
+        name="total"
+        #dueDate="ngModel"
+
+        pattern="(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}"
+      >
+
+
+    <div class ="error" *ngIf="dueDate.invalid && (dueDate.dirty || dueDate.touched)">
+      <p *ngIf="dueDate.hasError('required')">Enter Due date</p>
+      <p *ngIf="dueDate.hasError('pattern')">dd.mm.yyyy</p>
+    </div>
+    </div>
+    <div>
+      <div class="form-group col-md-6 mb-2">
+
+        <button type="submit" class="btn" [disabled]="!f.valid">Submit</button>
+
+        <button type="reset" class="btn">Reset</button>
+
+      </div>
+    </div>
+
+  </form>
+    </div>
+
+
