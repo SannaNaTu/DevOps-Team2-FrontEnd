@@ -135,6 +135,7 @@
       <label for="total">Summa:</label>
       <input
         type="text"
+
         class="form-control"
         id="total"
         [(ngModel)]="invoice.total"
@@ -142,33 +143,31 @@
         name="total"
         #total="ngModel"
 
-        pattern="^[0-9]*$,"
+
       >
 
 
     <div class ="error"*ngIf="total.invalid && (total.dirty || total.touched)">
       <p *ngIf="total.hasError('required')">Enter bic</p>
-      <p *ngIf="total.hasError('pattern')">Only digits</p>
+
     </div>
 </div>
     <div class="form-group col-md-6 mb-2">
       <label for="dueDate">Eräpäivä:</label>
       <input
-        type="text"
+        type="date"
         class="form-control"
         id="dueDate"
         [(ngModel)]="invoice.dueDate"
         placeholder="Eräpäivä"
         name="total"
         #dueDate="ngModel"
-
-        pattern="(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}"
-      >
+     >
 
 
     <div class ="error" *ngIf="dueDate.invalid && (dueDate.dirty || dueDate.touched)">
       <p *ngIf="dueDate.hasError('required')">Enter Due date</p>
-      <p *ngIf="dueDate.hasError('pattern')">dd.mm.yyyy</p>
+
     </div>
     </div>
     <div>
