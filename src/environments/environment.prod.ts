@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  apiEndpointUrl: 'https://devopsbank.azurewebsites.net',
+  apiEnabled: true
 };

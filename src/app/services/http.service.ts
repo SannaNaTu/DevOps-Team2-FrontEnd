@@ -10,23 +10,37 @@ import {environment} from '../../environments/environment';
 })
 export class HttpService {
 
-  url: string;
+  private url: string;
 
   constructor(private httpClient: HttpClient) {
-    this.url = environment.apiEndpoint;
+   this.url = environment.apiEndpointUrl;
   }
 
   get(): Observable<Invoice[]> {
-    return this.httpClient.get(this.url)
-      .pipe(map(response => {
+    return this.httpClient.get(this.url).pipe(map(response => {
         return response as Invoice[];
       }));
   }
 
-  getTask(id): Observable<Invoice> {
-    return this.httpClient.get(this.url + '/id:' + id)
+  getInvoice(id): Observable<Invoice> {
+    return this.httpClient.get(this.url + '/' + id)
       .pipe(map(response => {
         return response as Invoice;
       }));
+  }
+  editInvoice(invoice: Invoice): Observable<Invoice> {
+    return this.httpClient.put(this.url + '/' + invoice.id, invoice).pipe(map(response => {
+      return response as Invoice;
+    }));
+  }
+
+  createInvoice(invoice: Invoice): Observable<Invoice> {
+    return this.httpClient.post(this.url, invoice).pipe(map(response => {
+      return response as Invoice;
+    }));
+  }
+
+  deleteInvoice(invoice: Invoice): Observable<any> {
+    return this.httpClient.delete(this.url + '/' + invoice.id);
   }
 }

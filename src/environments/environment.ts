@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiEndpoint:
+  apiEndpointUrl: 'https://devopsbank.azurewebsites.net',
+  apiEnabled: true
 };
 
 /*

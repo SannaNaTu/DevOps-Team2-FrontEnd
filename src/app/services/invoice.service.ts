@@ -8,27 +8,27 @@ import {Observable, Subject} from 'rxjs';
 })
 export class InvoiceService {
 
-  tasks: Invoice[];
-  // tslint:disable-next-line:variable-name
-  private _login: Subject<any> = new Subject<any>();
-  public login = this._login.asObservable();
+  invoices: Invoice[];
 
   constructor(private httpService: HttpService) {
   }
 
-  getTasks(): Observable<Invoice[]> {
-    this.httpService.get()
-      .subscribe(response => {
-        this.tasks = response;
-      });
+  getInvoices(): Observable<Invoice[]> {
     return this.httpService.get();
   }
 
-  getTask(id): Observable<Invoice> {
-    return this.httpService.getTask(id);
+  getInvoice(id): Observable<Invoice> {
+    return this.httpService.getInvoice(id);
+  }
+  createInvoices(invoice: Invoice): Observable<Invoice> {
+    return this.httpService.createInvoice(invoice);
   }
 
-  setLogin(value) {
-    this._login.next(value);
+  editInvoices(invoice: Invoice): Observable<Invoice> {
+    return this.httpService.editInvoice(invoice);
+  }
+
+  deleteInvoices(invoice: Invoice): Observable<any> {
+    return this.httpService.deleteInvoice(invoice);
   }
 }
